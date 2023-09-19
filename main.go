@@ -8,6 +8,7 @@ import (
 	"github.com/PatipatCha/sgoc_account_service_demo.git/controller"
 	"github.com/PatipatCha/sgoc_account_service_demo.git/entities"
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -25,25 +26,20 @@ func initDatabase() {
 }
 
 func setupRoutes(app *fiber.App) {
-	api := app.Group("/api") // /api
+	api := app.Group("/api")
 
-	v1 := api.Group("/v1")                    // /api/v1
-	v1.Get("/account", controller.GetAccount) // /api/v1/list
+	v1 := api.Group("/v1")
+	v1.Get("/users", controller.GetAccount)
+	v1.Post("/user", controller.CreateAccount)
+	v1.Put("/user", controller.UpdateAccount)
 
-}
-
-func healthchecker(c *fiber.Ctx) error {
-	return c.Status(200).JSON(fiber.Map{
-		"status":  "success",
-		"message": "Welcome to Golang, Fiber, and GORM",
-	})
 }
 
 func main() {
 	app := fiber.New()
+	app.Use(cors.New(cors.Config{AllowHeaders: "Origin, Content-Type, Accept"}))
 
 	initDatabase()
-	app.Get("/", healthchecker)
 	setupRoutes(app)
 	log.Fatal(app.Listen(":3441"))
 }
