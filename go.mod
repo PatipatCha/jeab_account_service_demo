@@ -1,6 +1,6 @@
 module github.com/PatipatCha/sgoc_account_service_demo.git
 
-go 1.20.5
+go 1.20
 
 require (
 	github.com/gofiber/fiber/v2 v2.49.2
