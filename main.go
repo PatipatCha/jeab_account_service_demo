@@ -6,7 +6,6 @@ import (
 
 	"github.com/PatipatCha/sgoc_account_service_demo.git/config/database"
 	"github.com/PatipatCha/sgoc_account_service_demo.git/controller"
-	"github.com/PatipatCha/sgoc_account_service_demo.git/entities"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"gorm.io/driver/postgres"
@@ -21,7 +20,7 @@ func initDatabase() {
 		panic("Failed to connect to database")
 	}
 	fmt.Println("Database connected!")
-	database.DBConn.AutoMigrate(&entities.Account{})
+	// database.DBConn.AutoMigrate(&entities.Account{})
 	fmt.Println("Migrated DB")
 }
 
@@ -30,6 +29,7 @@ func setupRoutes(app *fiber.App) {
 
 	v1 := api.Group("/v1")
 	v1.Get("/users", controller.GetAccount)
+	v1.Get("/user/:id", controller.GetAccountById)
 	v1.Post("/user", controller.CreateAccount)
 	v1.Put("/user", controller.UpdateAccount)
 

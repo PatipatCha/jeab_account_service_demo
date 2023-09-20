@@ -7,9 +7,9 @@ type UpdateAccountRequest struct {
 	Email     string `json:"email" bson:"email"`
 	Mobile    string `json:"mobile" bson:"mobile"`
 	Role      string `json:"role" bson:"role"`
-	Status    bool   `json:"is_active" bson:"is_active"`
+	IsActive  bool   `json:"is_active" bson:"is_active"`
 }
 
-func (UpdateAccountRequest) TableName() string {
-	return "account"
-}
+// func (UpdateAccountRequest) TableName() string {
+// 	return "account"
+// }

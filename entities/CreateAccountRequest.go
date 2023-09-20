@@ -6,9 +6,9 @@ type CreateAccountRequest struct {
 	Email     string `json:"email" bson:"email"`
 	Mobile    string `json:"mobile" bson:"mobile"`
 	Role      string `json:"role" bson:"role"`
-	Status    bool   `json:"is_active" bson:"is_active"`
+	IsActive  bool   `json:"is_active" bson:"is_active"`
 }
 
-func (CreateAccountRequest) TableName() string {
-	return "account"
-}
+// func (CreateAccountRequest) TableName() string {
+// 	return "account"
+// }
